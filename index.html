@@ -89,6 +89,18 @@
 
   .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
   .reveal.in { opacity: 1; transform: none; }
+
+  /* waitlist */
+  .wait { max-width: 520px; margin: 28px auto 0; }
+  .wait form { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .wait input[type=email] { flex: 1 1 240px; min-width: 0; font: inherit; padding: 14px 18px; border-radius: 999px; border: 1.5px solid var(--soft); background: var(--card); color: var(--ink); }
+  .wait input[type=email]:focus { outline: none; border-color: var(--pink); }
+  .wait button { font: inherit; font-weight: 700; padding: 14px 24px; border: 0; border-radius: 999px; color: #fff; cursor: pointer; background: linear-gradient(135deg, var(--pink2), var(--pink)); box-shadow: 0 8px 22px rgba(217, 74, 130, .3); }
+  .wait button[disabled] { opacity: .6; cursor: default; }
+  .wait .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  .wait .msg { margin: 10px 0 0; min-height: 1.4em; font-size: 14px; color: var(--muted); }
+  .wait .msg.ok { color: var(--pink); font-weight: 600; }
+  .wait .fine { font-size: 12px; color: var(--muted); margin-top: 4px; }
   @media (prefers-reduced-motion: reduce) { .float, .hearts span { animation: none !important; } .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
   @media (max-width: 560px) { .phone { width: 36vw; border-width: 5px; border-radius: 26px; } .phone.side { width: 28vw; } .phone.left { transform: translateX(14px) rotate(-5deg); } .phone.right { transform: translateX(-14px) rotate(5deg); } .lead { font-size: 17px; } }
 </style>
@@ -103,6 +115,15 @@
     <h1><span data-en>Strength that fits <em>your cycle</em></span><span data-es>Fuerza que se adapta a <em>tu ciclo</em></span></h1>
     <p class="lead"><span data-en>Glute workouts for women, with simple cycle tracking and an assistant that answers your questions in plain words.</span><span data-es>Rutinas de glúteos para mujeres, con seguimiento sencillo del ciclo y un asistente que responde tus preguntas con palabras claras.</span></p>
     <span class="soon"><span data-en>Coming soon to iPhone</span><span data-es>Muy pronto en iPhone</span></span>
+    <div class="wait">
+      <form id="wait" novalidate>
+        <input type="email" id="wemail" name="email" required autocomplete="email" inputmode="email" maxlength="254" placeholder="you@email.com" aria-label="Email">
+        <input class="hp" type="text" id="whp" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="submit" id="wbtn"><span data-en>Tell me at launch</span><span data-es>Avísame al lanzamiento</span></button>
+      </form>
+      <p class="msg" id="wmsg" role="status" aria-live="polite"></p>
+      <p class="fine"><span data-en>One email when we launch. No spam. <a href="/privacy/">Privacy</a></span><span data-es>Un solo correo cuando lancemos. Sin spam. <a href="/privacy/">Privacidad</a></span></p>
+    </div>
 
     <div class="phones">
       <div class="phone side left float" style="animation-delay:.6s"><img data-en src="/assets/shots/program.jpg" alt="The Glutea program screen"><img data-es src="/assets/shots/program-es.jpg" alt="La pantalla de programa de Glutea"></div>
@@ -166,6 +187,22 @@
     var saved = null; try { saved = localStorage.getItem('glutea-lang'); } catch (e) {}
     set(saved || ((navigator.language || 'en').toLowerCase().indexOf('es') === 0 ? 'es' : 'en'));
     btn.addEventListener('click', function () { set(body.getAttribute('data-lang') === 'en' ? 'es' : 'en'); });
+
+    // Launch waitlist: one POST to our own Supabase table. The key below is the public "anon" key (safe to ship); it can only add rows.
+    var form = document.getElementById('wait'), msg = document.getElementById('wmsg'), wbtn = document.getElementById('wbtn');
+    var T = { en: { ok: 'You are on the list. Thank you!', dup: 'You are already on the list. Thank you!', bad: 'Please enter a valid email.', err: 'Something went wrong. Please try again in a minute.' }, es: { ok: '¡Ya estás en la lista! Gracias.', dup: 'Ya estás en la lista. ¡Gracias!', bad: 'Escribe un correo válido.', err: 'Algo salió mal. Inténtalo de nuevo en un minuto.' } };
+    function say(k, ok) { msg.className = 'msg' + (ok ? ' ok' : ''); msg.textContent = T[body.getAttribute('data-lang')][k]; }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = document.getElementById('wemail').value.trim();
+      if (document.getElementById('whp').value) { say('ok', true); return; }
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || email.length > 254) { say('bad'); return; }
+      wbtn.disabled = true;
+      fetch('https://ihacmfqsghmslkwewxjs.supabase.co/rest/v1/waitlist', { method: 'POST', headers: { 'Content-Type': 'application/json', apikey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImloYWNtZnFzZ2htc2xrd2V3eGpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM5Mjg2NzYsImV4cCI6MjEwOTUwNDY3Nn0.McFa8Lf-VLbdVpdeEuplPlywwjLJ9vN3QwhDTUCkvzM', Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImloYWNtZnFzZ2htc2xrd2V3eGpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM5Mjg2NzYsImV4cCI6MjEwOTUwNDY3Nn0.McFa8Lf-VLbdVpdeEuplPlywwjLJ9vN3QwhDTUCkvzM', Prefer: 'return=minimal' }, body: JSON.stringify({ email: email, lang: body.getAttribute('data-lang') }) })
+        .then(function (r) { if (r.status === 201 || r.status === 204) { say('ok', true); form.reset(); } else if (r.status === 409) { say('dup', true); } else { say('err'); } })
+        .catch(function () { say('err'); })
+        .then(function () { wbtn.disabled = false; });
+    });
     var els = document.querySelectorAll('.reveal');
     if ('IntersectionObserver' in window) {
       var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.12 });
