@@ -21,7 +21,12 @@
   a:hover { text-decoration: underline; }
   .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
 
-  .top { display: flex; justify-content: flex-end; padding: 16px 0 0; }
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 16px 0 0; }
+  .top-social { display: flex; align-items: center; gap: 8px; }
+  .top-social a { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--card); border: 1.5px solid var(--soft); transition: transform .2s, border-color .2s; }
+  .top-social a:hover { transform: translateY(-2px); border-color: var(--pink); text-decoration: none; }
+  .top-social svg { width: 17px; height: 17px; fill: var(--pink); }
+  .top-social .handle { font-weight: 700; font-size: 13px; color: var(--ink); }
   .lang { border: 1.5px solid var(--soft); background: var(--card); color: var(--pink); font-weight: 700; font-size: 13px; padding: 7px 14px; border-radius: 999px; cursor: pointer; }
 
   /* hero */
@@ -93,7 +98,7 @@
 <div class="hero">
   <div class="hearts" aria-hidden="true"><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span></div>
   <div class="wrap">
-    <div class="top"><button class="lang" id="lang" type="button" aria-label="Change language">ES · Español</button></div>
+    <div class="top"><div class="top-social"><a href="https://www.instagram.com/glutea.app/" aria-label="Instagram @glutea.app"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.2-3.2a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4Z"/></svg></a><a href="https://www.tiktok.com/@glutea.app" aria-label="TikTok @glutea.app"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 2h-3.2v13.2a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.1a6.2 6.2 0 1 0 5.2 6.1V8.6a7.8 7.8 0 0 0 4.4 1.4V6.8a4.6 4.6 0 0 1-4.4-4.8Z"/></svg></a><span class="handle">@glutea.app</span></div><button class="lang" id="lang" type="button" aria-label="Change language">ES · Español</button></div>
     <img class="wordmark" src="/assets/wordmark.png" alt="Glutea">
     <h1><span data-en>Strength that fits <em>your cycle</em></span><span data-es>Fuerza que se adapta a <em>tu ciclo</em></span></h1>
     <p class="lead"><span data-en>Glute workouts for women, with simple cycle tracking and an assistant that answers your questions in plain words.</span><span data-es>Rutinas de glúteos para mujeres, con seguimiento sencillo del ciclo y un asistente que responde tus preguntas con palabras claras.</span></p>
