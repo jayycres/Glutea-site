@@ -7,70 +7,166 @@
 <meta name="description" content="Glutea is a glute training app for women, with workouts that fit your cycle, simple tracking and an assistant for your questions. Coming soon to iPhone.">
 <link rel="icon" href="/assets/favicon.png">
 <link rel="apple-touch-icon" href="/assets/icon.png">
-<meta property="og:title" content="Glutea">
-<meta property="og:description" content="Strength that fits your cycle. Coming soon to iPhone.">
-<meta property="og:image" content="/assets/icon.png">
+<meta property="og:title" content="Glutea · Strength that fits your cycle">
+<meta property="og:description" content="Glute workouts that fit your cycle. Coming soon to iPhone.">
+<meta property="og:image" content="https://glutea.app/assets/icon.png">
 <style>
-  :root { --bg: #FFF1F6; --card: #FFFFFF; --ink: #3A2A33; --muted: #7A6670; --pink: #D94A82; --soft: #F8D3E2; }
-  @media (prefers-color-scheme: dark) { :root { --bg: #1B1015; --card: #26161D; --ink: #F7E8EF; --muted: #BFA3B0; --pink: #F58DB1; --soft: #4A2837; } }
+  :root { --bg: #FFF1F6; --bg2: #FFE3EE; --card: #FFFFFF; --ink: #3A2A33; --muted: #7A6670; --pink: #D94A82; --pink2: #F58DB1; --soft: #F8D3E2; --gold: #F2B84B; --frame: #2B1A24; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #1B1015; --bg2: #2A1620; --card: #26161D; --ink: #F7E8EF; --muted: #BFA3B0; --pink: #F58DB1; --pink2: #D94A82; --soft: #4A2837; --frame: #0E070A; } }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--ink); font-family: -apple-system, Helvetica, Arial, sans-serif; line-height: 1.6; }
-  main { max-width: 640px; margin: 0 auto; padding: 40px 20px 64px; text-align: center; }
-  .logo { width: min(420px, 100%); height: auto; margin: 8px auto 4px; display: block; }
-  h1 { font-size: 28px; line-height: 1.25; margin: 12px 0 8px; }
-  .lead { color: var(--muted); font-size: 18px; margin: 0 auto 28px; max-width: 30em; }
-  .soon { display: inline-block; background: var(--pink); color: #fff; font-weight: 700; padding: 12px 24px; border-radius: 999px; }
-  .cards { display: grid; gap: 12px; margin: 36px 0 12px; text-align: left; }
-  .card { background: var(--card); border: 1px solid var(--soft); border-radius: 18px; padding: 16px 18px; }
-  .card h3 { margin: 0 0 4px; font-size: 17px; color: var(--pink); }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: -apple-system, Helvetica, Arial, sans-serif; line-height: 1.6; overflow-x: hidden; }
+  [data-lang="en"] [data-es], [data-lang="es"] [data-en] { display: none !important; }
+  a { color: var(--pink); text-decoration: none; font-weight: 600; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+  .top { display: flex; justify-content: flex-end; padding: 16px 0 0; }
+  .lang { border: 1.5px solid var(--soft); background: var(--card); color: var(--pink); font-weight: 700; font-size: 13px; padding: 7px 14px; border-radius: 999px; cursor: pointer; }
+
+  /* hero */
+  .hero { position: relative; overflow: hidden; text-align: center; padding: 8px 0 56px; background: radial-gradient(60% 55% at 50% 0%, var(--bg2) 0%, transparent 70%); }
+  .hero::before, .hero::after { content: ""; position: absolute; z-index: 0; border-radius: 50%; filter: blur(60px); opacity: .55; pointer-events: none; }
+  .hero::before { width: 360px; height: 360px; background: var(--pink2); left: -140px; top: 160px; opacity: .28; }
+  .hero::after { width: 320px; height: 320px; background: #B89BE8; right: -120px; top: 420px; opacity: .22; }
+  .hero > * { position: relative; z-index: 1; }
+  .wordmark { width: min(460px, 88%); height: auto; display: block; margin: 4px auto 0; }
+  h1 { font-family: "Iowan Old Style", Georgia, "Times New Roman", serif; font-weight: 600; font-size: clamp(32px, 6vw, 52px); line-height: 1.12; margin: 14px auto 12px; max-width: 14em; }
+  h1 em { color: var(--pink); font-style: italic; }
+  .lead { color: var(--muted); font-size: 19px; max-width: 32em; margin: 0 auto 26px; }
+  .soon { display: inline-block; background: linear-gradient(135deg, var(--pink2), var(--pink)); color: #fff; font-weight: 700; padding: 14px 28px; border-radius: 999px; box-shadow: 0 10px 28px rgba(217, 74, 130, .35); }
+  .soon small { display: block; font-weight: 500; opacity: .9; font-size: 12px; }
+
+  /* phones */
+  .phones { display: flex; justify-content: center; align-items: flex-end; gap: 0; margin: 48px auto 0; }
+  .phone { position: relative; width: min(30vw, 260px); border: 7px solid var(--frame); border-radius: 36px; overflow: hidden; background: var(--bg); box-shadow: 0 24px 60px rgba(60, 20, 40, .28); }
+  .phone img { display: block; width: 100%; height: auto; }
+  .phone.side { width: min(25vw, 214px); opacity: .98; }
+  .phone.left { transform: translateX(22px) rotate(-6deg); }
+  .phone.right { transform: translateX(-22px) rotate(6deg); }
+  .phone.mid { z-index: 2; }
+  .float { animation: float 7s ease-in-out infinite; }
+  @keyframes float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
+
+  .hearts { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+  .hearts span { position: absolute; bottom: -30px; color: var(--pink2); opacity: 0; font-size: 18px; animation: rise 12s linear infinite; }
+  .hearts span:nth-child(1) { left: 8%; animation-delay: 0s; } .hearts span:nth-child(2) { left: 22%; animation-delay: 3s; font-size: 14px; }
+  .hearts span:nth-child(3) { left: 40%; animation-delay: 7s; font-size: 22px; } .hearts span:nth-child(4) { left: 62%; animation-delay: 2s; }
+  .hearts span:nth-child(5) { left: 78%; animation-delay: 5s; font-size: 15px; } .hearts span:nth-child(6) { left: 92%; animation-delay: 9s; }
+  @keyframes rise { 0% { transform: translateY(0) rotate(-8deg); opacity: 0; } 15% { opacity: .5; } 100% { transform: translateY(-640px) rotate(10deg); opacity: 0; } }
+
+  /* sections */
+  section { padding: 56px 0; }
+  h2 { font-family: "Iowan Old Style", Georgia, serif; font-weight: 600; font-size: clamp(26px, 4.4vw, 36px); line-height: 1.2; text-align: center; margin: 0 0 8px; }
+  .sub { text-align: center; color: var(--muted); margin: 0 auto 36px; max-width: 32em; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .card { background: var(--card); border: 1px solid var(--soft); border-radius: 22px; padding: 22px; box-shadow: 0 6px 20px rgba(217, 74, 130, .07); transition: transform .25s ease, box-shadow .25s ease; }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(217, 74, 130, .16); }
+  .ico { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; background: linear-gradient(135deg, var(--soft), var(--bg2)); font-size: 22px; margin-bottom: 12px; }
+  .card h3 { margin: 0 0 6px; font-size: 18px; }
   .card p { margin: 0; color: var(--muted); font-size: 15px; }
-  .links { margin-top: 28px; font-size: 15px; }
-  .links a, footer a { color: var(--pink); text-decoration: none; font-weight: 600; }
-  .links a:hover, footer a:hover { text-decoration: underline; }
-  hr { border: none; border-top: 1px solid var(--soft); margin: 48px 0; }
-  footer { margin-top: 32px; color: var(--muted); font-size: 13px; }
-  .small { color: var(--muted); font-size: 13px; margin-top: 10px; }
+
+  .steps { counter-reset: s; display: grid; gap: 14px; max-width: 640px; margin: 0 auto; }
+  .step { display: flex; gap: 16px; align-items: flex-start; background: var(--card); border: 1px solid var(--soft); border-radius: 20px; padding: 18px 20px; }
+  .step::before { counter-increment: s; content: counter(s); flex: none; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg, var(--pink2), var(--pink)); color: #fff; font-weight: 700; }
+  .step b { display: block; margin-bottom: 2px; }
+  .step span { color: var(--muted); font-size: 15px; }
+
+  .band { background: linear-gradient(135deg, var(--bg2), var(--bg)); border-top: 1px solid var(--soft); border-bottom: 1px solid var(--soft); }
+  .social { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; margin-top: 8px; }
+  .chip { display: inline-flex; align-items: center; gap: 10px; background: var(--card); border: 1.5px solid var(--soft); border-radius: 999px; padding: 12px 22px; color: var(--ink); font-weight: 700; transition: transform .2s, border-color .2s; }
+  .chip:hover { transform: translateY(-2px); border-color: var(--pink); text-decoration: none; }
+  .chip svg { width: 22px; height: 22px; fill: var(--pink); }
+  .note { text-align: center; color: var(--muted); font-size: 13px; max-width: 40em; margin: 0 auto; }
+
+  footer { text-align: center; padding: 28px 20px 48px; color: var(--muted); font-size: 13px; }
+  footer .links { margin-bottom: 10px; font-size: 15px; }
+
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .float, .hearts span { animation: none !important; } .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+  @media (max-width: 560px) { .phone { width: 36vw; border-width: 5px; border-radius: 26px; } .phone.side { width: 28vw; } .phone.left { transform: translateX(14px) rotate(-5deg); } .phone.right { transform: translateX(-14px) rotate(5deg); } .lead { font-size: 17px; } }
 </style>
 </head>
-<body>
-<main>
-<img class="logo" src="/assets/wordmark.png" alt="Glutea">
-<p class="small"><a href="#es" style="color:var(--pink)">Leer en español</a></p>
-<h1>Strength that fits your cycle</h1>
-<p class="lead">Glute workouts for women, with simple cycle tracking and an assistant that answers your questions in plain words.</p>
-<span class="soon">Coming soon to iPhone</span>
+<body data-lang="en">
 
-<div class="cards">
-  <div class="card"><h3>Workouts that fit you</h3><p>Plans for the gym or home, with new options every two weeks so training stays fresh.</p></div>
-  <div class="card"><h3>Know your cycle</h3><p>Log how you feel and see your own patterns for energy, mood and training.</p></div>
-  <div class="card"><h3>Ask anything</h3><p>An assistant that explains things in friendly, plain language. It is not medical advice.</p></div>
+<div class="hero">
+  <div class="hearts" aria-hidden="true"><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span></div>
+  <div class="wrap">
+    <div class="top"><button class="lang" id="lang" type="button" aria-label="Change language">ES · Español</button></div>
+    <img class="wordmark" src="/assets/wordmark.png" alt="Glutea">
+    <h1><span data-en>Strength that fits <em>your cycle</em></span><span data-es>Fuerza que se adapta a <em>tu ciclo</em></span></h1>
+    <p class="lead"><span data-en>Glute workouts for women, with simple cycle tracking and an assistant that answers your questions in plain words.</span><span data-es>Rutinas de glúteos para mujeres, con seguimiento sencillo del ciclo y un asistente que responde tus preguntas con palabras claras.</span></p>
+    <span class="soon"><span data-en>Coming soon to iPhone</span><span data-es>Muy pronto en iPhone</span></span>
+
+    <div class="phones">
+      <div class="phone side left float" style="animation-delay:.6s"><img data-en src="/assets/shots/program.jpg" alt="The Glutea program screen"><img data-es src="/assets/shots/program-es.jpg" alt="La pantalla de programa de Glutea"></div>
+      <div class="phone mid float"><img data-en src="/assets/shots/cycle.jpg" alt="The Glutea cycle screen showing the day and phase"><img data-es src="/assets/shots/cycle-es.jpg" alt="La pantalla del ciclo de Glutea con el día y la fase"></div>
+      <div class="phone side right float" style="animation-delay:1.2s"><img data-en src="/assets/shots/today.jpg" alt="The Glutea Today screen"><img data-es src="/assets/shots/today-es.jpg" alt="La pantalla de hoy de Glutea"></div>
+    </div>
+  </div>
 </div>
 
-<div class="links">
-  <a href="/support/">Support</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a><br>
-  <a href="https://www.instagram.com/glutea.app/">Instagram</a> · <a href="https://www.tiktok.com/@glutea.app">TikTok</a>
-</div>
+<section>
+  <div class="wrap">
+    <h2 class="reveal"><span data-en>Made for how you actually feel</span><span data-es>Hecha para cómo te sientes de verdad</span></h2>
+    <p class="sub reveal"><span data-en>Some weeks you feel unstoppable. Some weeks you need a lighter day. Glutea trains with you through both.</span><span data-es>Hay semanas en que te sientes imparable y otras en que necesitas un día más suave. Glutea entrena contigo en ambas.</span></p>
+    <div class="grid">
+      <div class="card reveal"><div class="ico">🍑</div><h3><span data-en>Glute workouts that fit you</span><span data-es>Rutinas de glúteos para ti</span></h3><p><span data-en>Plans for the gym or home, from beginner to advanced, with fresh options every two weeks.</span><span data-es>Planes para el gimnasio o la casa, de principiante a avanzado, con opciones nuevas cada dos semanas.</span></p></div>
+      <div class="card reveal"><div class="ico">🌙</div><h3><span data-en>Know your cycle</span><span data-es>Conoce tu ciclo</span></h3><p><span data-en>Log how you feel in a few taps and see your own patterns for energy, mood and training.</span><span data-es>Anota cómo te sientes en unos toques y descubre tus propios patrones de energía, ánimo y entrenamiento.</span></p></div>
+      <div class="card reveal"><div class="ico">💬</div><h3><span data-en>Ask anything</span><span data-es>Pregunta lo que quieras</span></h3><p><span data-en>An assistant that explains things in friendly, plain language. It is not medical advice.</span><span data-es>Un asistente que explica todo en un lenguaje amable y sencillo. No es consejo médico.</span></p></div>
+      <div class="card reveal"><div class="ico">✨</div><h3><span data-en>Check in daily</span><span data-es>Revisa tu día</span></h3><p><span data-en>A quick check on sleep, mood, body and fuel, so your plan can ease up when you need it to.</span><span data-es>Un repaso rápido de sueño, ánimo, cuerpo y comida, para que tu plan baje el ritmo cuando lo necesites.</span></p></div>
+      <div class="card reveal"><div class="ico">📈</div><h3><span data-en>See your progress</span><span data-es>Mira tu progreso</span></h3><p><span data-en>Track your workouts, weight and photos in one private place, just for you.</span><span data-es>Sigue tus entrenamientos, tu peso y tus fotos en un lugar privado, solo para ti.</span></p></div>
+      <div class="card reveal"><div class="ico">🔒</div><h3><span data-en>Private by design</span><span data-es>Privada por diseño</span></h3><p><span data-en>Your logs are stored on your phone, and you choose whether the assistant sees them. Back up, restore or delete everything any time.</span><span data-es>Tus registros se guardan en tu teléfono y tú decides si el asistente los ve. Respalda, restaura o borra todo cuando quieras.</span></p></div>
+    </div>
+  </div>
+</section>
 
-<hr>
+<section class="band">
+  <div class="wrap">
+    <h2 class="reveal"><span data-en>How it works</span><span data-es>Cómo funciona</span></h2>
+    <p class="sub reveal"><span data-en>Simple from the first day.</span><span data-es>Sencilla desde el primer día.</span></p>
+    <div class="steps">
+      <div class="step reveal"><div><b><span data-en>Tell us about you</span><span data-es>Cuéntanos de ti</span></b><span><span data-en>Pick your level, where you train and which days you like.</span><span data-es>Elige tu nivel, dónde entrenas y qué días prefieres.</span></span></div></div>
+      <div class="step reveal"><div><b><span data-en>Train and check in</span><span data-es>Entrena y revisa tu día</span></b><span><span data-en>Follow today's workout and log how you feel. It takes a few seconds.</span><span data-es>Sigue el entrenamiento de hoy y anota cómo te sientes. Toma unos segundos.</span></span></div></div>
+      <div class="step reveal"><div><b><span data-en>Watch your patterns grow</span><span data-es>Mira crecer tus patrones</span></b><span><span data-en>The more you log, the more your insights show about you.</span><span data-es>Mientras más anotas, más te muestran tus resultados.</span></span></div></div>
+    </div>
+  </div>
+</section>
 
-<div id="es">
-<h1>Fuerza que se adapta a tu ciclo</h1>
-<p class="lead">Rutinas de glúteos para mujeres, con seguimiento sencillo del ciclo y un asistente que responde tus preguntas con palabras claras.</p>
-<span class="soon">Muy pronto en iPhone</span>
+<section>
+  <div class="wrap">
+    <h2 class="reveal"><span data-en>Follow along</span><span data-es>Síguenos</span></h2>
+    <p class="sub reveal"><span data-en>Tips, behind the scenes and launch news.</span><span data-es>Consejos, detrás de cámaras y noticias del lanzamiento.</span></p>
+    <div class="social reveal">
+      <a class="chip" href="https://www.instagram.com/glutea.app/" aria-label="Instagram @glutea.app"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.2-3.2a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4Z"/></svg>Instagram · @glutea.app</a>
+      <a class="chip" href="https://www.tiktok.com/@glutea.app" aria-label="TikTok @glutea.app"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 2h-3.2v13.2a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.1a6.2 6.2 0 1 0 5.2 6.1V8.6a7.8 7.8 0 0 0 4.4 1.4V6.8a4.6 4.6 0 0 1-4.4-4.8Z"/></svg>TikTok · @glutea.app</a>
+    </div>
+  </div>
+</section>
 
-<div class="cards">
-  <div class="card"><h3>Rutinas para ti</h3><p>Planes para el gimnasio o la casa, con opciones nuevas cada dos semanas para que entrenar nunca se sienta repetido.</p></div>
-  <div class="card"><h3>Conoce tu ciclo</h3><p>Anota cómo te sientes y descubre tus propios patrones de energía, ánimo y entrenamiento.</p></div>
-  <div class="card"><h3>Pregunta lo que quieras</h3><p>Un asistente que explica todo en un lenguaje amable y sencillo. No es consejo médico.</p></div>
-</div>
+<section style="padding-top:0">
+  <div class="wrap"><p class="note"><span data-en>Glutea is for general fitness and education. It is not medical advice and does not diagnose or treat any condition. Talk to your doctor about any health concern.</span><span data-es>Glutea es para ejercicio general y educación. No es consejo médico y no diagnostica ni trata ninguna condición. Habla con tu médico sobre cualquier inquietud de salud.</span></p></div>
+</section>
 
-<div class="links">
-  <a href="/support/">Soporte</a> · <a href="/privacy/">Privacidad</a> · <a href="/terms/">Términos</a><br>
-  <a href="https://www.instagram.com/glutea.app/">Instagram</a> · <a href="https://www.tiktok.com/@glutea.app">TikTok</a>
-</div>
-</div>
+<footer>
+  <div class="links"><a href="/support/"><span data-en>Support</span><span data-es>Soporte</span></a> · <a href="/privacy/"><span data-en>Privacy</span><span data-es>Privacidad</span></a> · <a href="/terms/"><span data-en>Terms</span><span data-es>Términos</span></a> · <a href="mailto:support@glutea.app">support@glutea.app</a></div>
+  © 2026 Gold App LLC
+</footer>
 
-<footer>© 2026 Gold App LLC · <a href="mailto:support@glutea.app">support@glutea.app</a></footer>
-</main>
+<script>
+  (function () {
+    var body = document.body, btn = document.getElementById('lang');
+    function set(l) { body.setAttribute('data-lang', l); document.documentElement.lang = l; btn.textContent = l === 'en' ? 'ES · Español' : 'EN · English'; try { localStorage.setItem('glutea-lang', l); } catch (e) {} }
+    var saved = null; try { saved = localStorage.getItem('glutea-lang'); } catch (e) {}
+    set(saved || ((navigator.language || 'en').toLowerCase().indexOf('es') === 0 ? 'es' : 'en'));
+    btn.addEventListener('click', function () { set(body.getAttribute('data-lang') === 'en' ? 'es' : 'en'); });
+    var els = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.12 });
+      els.forEach(function (el) { io.observe(el); });
+    } else { els.forEach(function (el) { el.classList.add('in'); }); }
+  })();
+</script>
 </body>
 </html>
