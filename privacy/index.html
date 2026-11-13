@@ -28,7 +28,7 @@
   <li>Your progress photos and body scan results, and the city you choose for the weather.</li>
   <li>Your reminders. They are scheduled by your phone itself and are never sent to us.</li>
 </ul>
-<p>We can't see any of this. It is not uploaded to our servers.</p>
+<p>We can't see any of this. It is not uploaded to our servers, unless you choose to sign in and turn on account backup (see below).</p>
 
 <h2>What leaves your phone, and only when you use that feature</h2>
 <ul>
@@ -37,6 +37,8 @@
   <li><strong>Voice:</strong> if you use the microphone button, Apple's speech recognition turns your voice into words. Only the words you send go to the assistant.</li>
   <li><strong>Weather:</strong> the city you pick is sent to Open-Meteo to look up its location and forecast.</li>
   <li><strong>Our silent account:</strong> the first time you use Ask or Body scan, or subscribe, the app creates an anonymous account with a random ID, with no email or password. We store only that ID and how many questions or scans it used each day, to enforce daily limits.</li>
+  <li><strong>Your account (optional):</strong> you can sign in with Apple or an email and password. We store your email address (or the private relay address Apple gives us) and a secure sign in record. Passwords are stored by our authentication provider, Supabase, in hashed form, so we cannot read them. Face ID is checked on your phone by Apple. We never receive your face data. Password reset emails are sent through Resend.</li>
+  <li><strong>Account backup (optional, off by default):</strong> if you turn it on in Settings, a private copy of your logs and settings, including cycle and health logs, is stored in your account in our database so you can restore it on a new phone. Only your account can read it, and it is not used for ads, analytics or sharing. Photos and body scans are never included. You can turn it off, or delete it by deleting your account, at any time.</li>
   <li><strong>Membership:</strong> payments are handled by Apple. When subscriptions are available, our subscription provider, RevenueCat, receives a random app ID and your membership status so the app can unlock your features. We never see your card or Apple ID.</li>
   <li><strong>Crash reports:</strong> if the app crashes, our crash reporting service, Sentry, may receive the kind of error, the phone model and the app version so we can fix it. We keep these reports bare on purpose: no name, no screenshots, no record of what you tapped or logged.</li>
   <li><strong>App updates:</strong> Expo delivers updates to the app and receives the app version and phone type when it checks for one.</li>
@@ -46,12 +48,13 @@
 <p>We don't use advertising, ad tracking or analytics services, and we don't sell your data.</p>
 
 <h2>Health information</h2>
-<p>Cycle and health details are sensitive, so we treat them that way. Your logs live on your phone. They leave it only inside the Ask features above, and only when you choose to use them or share your logs. Health checks are screening questions, not a diagnosis. Glutea is not a medical device and is not a service of a healthcare provider.</p>
+<p>Cycle and health details are sensitive, so we treat them that way. Your logs live on your phone. They leave it only inside the Ask features above, or in your account backup if you turn that on, and only when you choose. Health checks are screening questions, not a diagnosis. Glutea is not a medical device and is not a service of a healthcare provider.</p>
 
 <h2>Back up, delete or move your data</h2>
 <ul>
   <li><strong>Back up:</strong> Settings → Account and privacy → Back up or restore my data. You get a block of text you can save wherever you like. We never receive it. Anyone who finds that text can read your logs, so keep it private.</li>
-  <li><strong>Delete:</strong> Settings → Account and privacy → Delete my account and data. This erases everything saved on your phone and deletes your account and daily counts on our server. It can't be undone. It does not cancel a membership: cancel that in your Apple subscriptions.</li>
+  <li><strong>Account backup:</strong> if you signed in, Settings → Account and privacy lets you turn on a private backup in your account and restore it on a new phone.</li>
+  <li><strong>Delete:</strong> Settings → Account and privacy → Delete my account and data. This erases everything saved on your phone and deletes your account, your backup and daily counts on our server. It can't be undone. It does not cancel a membership: cancel that in your Apple subscriptions.</li>
   <li><strong>Delete the app:</strong> removing the app from your phone also removes what it saved on the phone.</li>
 </ul>
 
@@ -78,7 +81,7 @@
   <li>Tus fotos de progreso y resultados del escaneo corporal, y la ciudad que eliges para el clima.</li>
   <li>Tus recordatorios. Los programa tu propio teléfono y nunca se envían a nosotros.</li>
 </ul>
-<p>No podemos ver nada de esto. No se sube a nuestros servidores.</p>
+<p>No podemos ver nada de esto. No se sube a nuestros servidores, a menos que decidas iniciar sesión y activar la copia de seguridad de tu cuenta (más abajo).</p>
 
 <h2>Lo que sale de tu teléfono, solo cuando usas esa función</h2>
 <ul>
@@ -87,6 +90,8 @@
   <li><strong>Voz:</strong> si usas el botón del micrófono, el reconocimiento de voz de Apple convierte tu voz en texto. Al asistente solo llegan las palabras que envías.</li>
   <li><strong>Clima:</strong> la ciudad que eliges se envía a Open-Meteo para buscar su ubicación y pronóstico.</li>
   <li><strong>Nuestra cuenta silenciosa:</strong> la primera vez que usas Pregunta o Escaneo corporal, o te suscribes, la app crea una cuenta anónima con un ID aleatorio, sin correo ni contraseña. Solo guardamos ese ID y cuántas preguntas o escaneos usó cada día, para aplicar los límites diarios.</li>
+  <li><strong>Tu cuenta (opcional):</strong> puedes iniciar sesión con Apple o con correo y contraseña. Guardamos tu correo (o la dirección privada que Apple nos da) y un registro seguro de tu sesión. Las contraseñas las guarda nuestro proveedor de autenticación, Supabase, de forma cifrada, así que no podemos leerlas. Face ID lo verifica Apple en tu teléfono. Nunca recibimos los datos de tu rostro. Los correos para restablecer la contraseña se envían con Resend.</li>
+  <li><strong>Copia de seguridad de la cuenta (opcional, apagada por defecto):</strong> si la activas en Ajustes, se guarda en tu cuenta, en nuestra base de datos, una copia privada de tus registros y ajustes, incluidos los registros del ciclo y de salud, para que la restaures en un teléfono nuevo. Solo tu cuenta puede leerla y no se usa para anuncios, análisis ni se comparte. Las fotos y los escaneos corporales nunca se incluyen. Puedes desactivarla, o borrarla al eliminar tu cuenta, cuando quieras.</li>
   <li><strong>Membresía:</strong> los pagos los maneja Apple. Cuando las suscripciones estén disponibles, nuestro proveedor de suscripciones, RevenueCat, recibe un ID aleatorio de la app y el estado de tu membresía para que la app desbloquee tus funciones. Nunca vemos tu tarjeta ni tu Apple ID.</li>
   <li><strong>Reportes de fallos:</strong> si la app falla, nuestro servicio de reportes de fallos, Sentry, puede recibir el tipo de error, el modelo del teléfono y la versión de la app para que podamos arreglarlo. Mantenemos estos reportes al mínimo a propósito: sin nombre, sin capturas de pantalla y sin registro de lo que tocaste o registraste.</li>
   <li><strong>Actualizaciones:</strong> Expo entrega las actualizaciones de la app y recibe la versión de la app y el tipo de teléfono cuando busca una.</li>
@@ -96,12 +101,13 @@
 <p>No usamos publicidad, rastreo publicitario ni servicios de analítica, y no vendemos tus datos.</p>
 
 <h2>Información de salud</h2>
-<p>Los datos del ciclo y de salud son sensibles, y los tratamos así. Tus registros viven en tu teléfono. Solo salen dentro de las funciones de Pregunta descritas arriba, y únicamente cuando decides usarlas o compartir tus registros. Los chequeos de salud son preguntas de orientación, no un diagnóstico. Glutea no es un dispositivo médico ni un servicio de un profesional de la salud.</p>
+<p>Los datos del ciclo y de salud son sensibles, y los tratamos así. Tus registros viven en tu teléfono. Solo salen dentro de las funciones de Pregunta descritas arriba, o en la copia de seguridad de tu cuenta si la activas, y únicamente cuando tú decides. Los chequeos de salud son preguntas de orientación, no un diagnóstico. Glutea no es un dispositivo médico ni un servicio de un profesional de la salud.</p>
 
 <h2>Copia de seguridad, borrar o mover tus datos</h2>
 <ul>
   <li><strong>Copia de seguridad:</strong> Ajustes → Cuenta y privacidad → Copia de seguridad o restaurar. Recibes un bloque de texto que puedes guardar donde quieras. Nosotros nunca lo recibimos. Quien encuentre ese texto podrá leer tus registros, así que guárdalo en privado.</li>
-  <li><strong>Borrar:</strong> Ajustes → Cuenta y privacidad → Eliminar mi cuenta y datos. Esto borra todo lo guardado en tu teléfono y elimina tu cuenta y tus conteos diarios en nuestro servidor. No se puede deshacer. No cancela una membresía: cancélala en tus suscripciones de Apple.</li>
+  <li><strong>Copia de seguridad de la cuenta:</strong> si iniciaste sesión, en Ajustes → Cuenta y privacidad puedes activar una copia privada en tu cuenta y restaurarla en un teléfono nuevo.</li>
+  <li><strong>Borrar:</strong> Ajustes → Cuenta y privacidad → Eliminar mi cuenta y datos. Esto borra todo lo guardado en tu teléfono y elimina tu cuenta, tu copia de seguridad y tus conteos diarios en nuestro servidor. No se puede deshacer. No cancela una membresía: cancélala en tus suscripciones de Apple.</li>
   <li><strong>Eliminar la app:</strong> quitar la app de tu teléfono también borra lo que guardó en él.</li>
 </ul>
 
