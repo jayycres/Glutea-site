@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Email confirmed · Glutea</title>
+<link rel="icon" href="../assets/favicon.png">
+<style>
+  :root { --bg:#FFF5F8; --text:#3A2A33; --muted:#8F7A85; --pink:#D94A82; --card:#fff; --border:#F8DCE6; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1d1218; --text:#f5e8ee; --muted:#b9a3ad; --card:#2a1620; --border:#6b3a52; } }
+  * { box-sizing: border-box; }
+  body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px 16px; background:var(--bg); color:var(--text); font-family:-apple-system,Helvetica,Arial,sans-serif; line-height:1.55; }
+  main { width:100%; max-width:440px; text-align:center; background:var(--card); border:1.5px solid var(--border); border-radius:24px; padding:32px 24px; box-shadow:0 12px 40px rgba(217,74,130,.12); }
+  img { width:min(260px,70%); height:auto; }
+  .heart { font-size:44px; margin:8px 0 0; }
+  h1 { font-size:26px; margin:8px 0; color:var(--pink); }
+  p { margin:8px 0; }
+  .muted { color:var(--muted); font-size:14px; }
+  .lang { margin-top:20px; font-size:14px; }
+  a { color:var(--pink); font-weight:600; }
+  [hidden] { display:none !important; }
+</style>
+</head>
+<body>
+<main>
+  <img src="../assets/wordmark.png" alt="Glutea">
+  <div id="ok">
+    <div class="heart">💗</div>
+    <h1 data-en="Your email is confirmed" data-es="Tu correo está confirmado">Your email is confirmed</h1>
+    <p data-en="You're all set. Go back to the Glutea app and sign in with your email and password." data-es="Todo listo. Vuelve a la app de Glutea e inicia sesión con tu correo y tu contraseña.">You're all set. Go back to the Glutea app and sign in with your email and password.</p>
+  </div>
+  <div id="bad" hidden>
+    <h1 data-en="That link didn't work" data-es="Ese enlace no funcionó">That link didn't work</h1>
+    <p data-en="It may have expired or already been used. Open the Glutea app and try signing in. If it still won't let you in, email support@glutea.app and we'll help." data-es="Puede que haya caducado o ya se haya usado. Abre la app de Glutea e intenta iniciar sesión. Si aún no puedes entrar, escribe a support@glutea.app y te ayudamos.">It may have expired or already been used. Open the Glutea app and try signing in. If it still won't let you in, email support@glutea.app and we'll help.</p>
+  </div>
+  <p class="lang"><a href="#" id="toggle">Español</a></p>
+</main>
+<script>
+  var es = /^es/i.test(navigator.language || '');
+  function apply() {
+    document.documentElement.lang = es ? 'es' : 'en';
+    document.querySelectorAll('[data-en]').forEach(function (el) { el.textContent = es ? el.dataset.es : el.dataset.en; });
+    document.getElementById('toggle').textContent = es ? 'English' : 'Español';
+  }
+  document.getElementById('toggle').addEventListener('click', function (e) { e.preventDefault(); es = !es; apply(); });
+  // If the link was expired or already used, the address ends in #error=...
+  if (/error/i.test(location.hash)) { document.getElementById('ok').hidden = true; document.getElementById('bad').hidden = false; }
+  // Don't leave any sign in tokens sitting in the address bar.
+  if (location.hash && history.replaceState) history.replaceState(null, '', location.pathname);
+  apply();
+</script>
+</body>
+</html>
