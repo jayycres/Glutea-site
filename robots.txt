@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://glutea.app/sitemap.xml

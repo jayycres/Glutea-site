@@ -1,0 +1,49 @@
+:root { --bg: #FFF1F6; --bg2: #FFE3EE; --card: #FFFFFF; --ink: #3A2A33; --muted: #7A6670; --pink: #D94A82; --pink2: #F58DB1; --soft: #F8D3E2; }
+@media (prefers-color-scheme: dark) { :root { --bg: #1B1015; --bg2: #2A1620; --card: #26161D; --ink: #F7E8EF; --muted: #BFA3B0; --pink: #F58DB1; --pink2: #D94A82; --soft: #4A2837; } }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: -apple-system, Helvetica, Arial, sans-serif; line-height: 1.65; }
+[data-lang="en"] [data-es], [data-lang="es"] [data-en] { display: none !important; }
+a { color: var(--pink); font-weight: 600; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 740px; margin: 0 auto; padding: 0 20px; }
+.top { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 16px 0 0; }
+.top .home { display: flex; align-items: center; gap: 10px; }
+.top .home img { height: 30px; width: auto; display: block; }
+.lang { border: 1.5px solid var(--soft); background: var(--card); color: var(--pink); font-weight: 700; font-size: 13px; padding: 7px 14px; border-radius: 999px; cursor: pointer; font-family: inherit; }
+header.page { padding: 36px 0 8px; }
+.crumb { font-size: 14px; color: var(--muted); margin: 0 0 10px; }
+h1 { font-family: "Iowan Old Style", Georgia, "Times New Roman", serif; font-weight: 600; font-size: clamp(30px, 6vw, 44px); line-height: 1.15; margin: 0 0 14px; text-wrap: balance; }
+h1 em { color: var(--pink); font-style: italic; }
+.lead { color: var(--muted); font-size: 19px; margin: 0 0 8px; }
+h2 { font-family: "Iowan Old Style", Georgia, serif; font-weight: 600; font-size: clamp(22px, 4vw, 28px); line-height: 1.25; margin: 40px 0 10px; }
+h3 { font-size: 17px; margin: 22px 0 4px; }
+p { margin: 0 0 14px; }
+ul, ol { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 8px; }
+.muted { color: var(--muted); }
+.callout { background: var(--card); border: 1.5px solid var(--soft); border-left: 5px solid var(--pink); border-radius: 16px; padding: 14px 18px 4px; margin: 22px 0; }
+.callout b.t { display: block; margin-bottom: 4px; }
+.day { background: var(--card); border: 1px solid var(--soft); border-radius: 20px; padding: 18px 20px 6px; margin: 0 0 14px; box-shadow: 0 6px 20px rgba(217, 74, 130, .07); }
+.day h3 { margin: 0 0 8px; }
+.day li { display: flex; justify-content: space-between; gap: 14px; list-style: none; border-bottom: 1px dashed var(--soft); padding: 7px 0; margin: 0; }
+.day ul { padding: 0; margin: 0 0 8px; }
+.day li:last-child { border-bottom: 0; }
+.day li span.dose { flex: none; color: var(--pink); font-weight: 700; white-space: nowrap; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin: 20px 0 8px; }
+.card { display: block; background: var(--card); border: 1px solid var(--soft); border-radius: 20px; padding: 20px; color: var(--ink); font-weight: 400; box-shadow: 0 6px 20px rgba(217, 74, 130, .07); transition: transform .25s ease, box-shadow .25s ease; }
+.card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(217, 74, 130, .16); text-decoration: none; }
+.card h3 { margin: 0 0 6px; color: var(--ink); }
+.card p { margin: 0 0 10px; color: var(--muted); font-size: 15px; }
+.card .more { color: var(--pink); font-weight: 700; font-size: 15px; }
+.cta { margin: 40px 0 12px; text-align: center; background: linear-gradient(135deg, var(--bg2), var(--soft)); border-radius: 24px; padding: 28px 20px 24px; }
+.cta h2 { margin: 0 0 8px; }
+.cta p { color: var(--muted); max-width: 30em; margin: 0 auto 16px; }
+.btn { display: inline-block; background: linear-gradient(135deg, var(--pink2), var(--pink)); color: #fff; font-weight: 700; padding: 13px 26px; border-radius: 999px; box-shadow: 0 8px 22px rgba(217, 74, 130, .3); }
+.btn:hover { text-decoration: none; transform: translateY(-1px); }
+.sources { font-size: 14px; color: var(--muted); }
+.sources li { margin-bottom: 6px; }
+.note { font-size: 13px; color: var(--muted); max-width: 40em; margin: 28px 0 0; }
+footer { text-align: center; padding: 28px 20px 48px; color: var(--muted); font-size: 13px; }
+footer .links { margin-bottom: 10px; font-size: 15px; }
+@media (max-width: 480px) { .day li { flex-direction: column; gap: 0; } }
