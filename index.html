@@ -9,7 +9,17 @@
 <link rel="apple-touch-icon" href="/assets/icon.png">
 <meta property="og:title" content="Glutea · Strength that fits your cycle">
 <meta property="og:description" content="Glute workouts that fit your cycle. Coming soon to iPhone.">
-<meta property="og:image" content="https://glutea.app/assets/icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://glutea.app/">
+<meta property="og:site_name" content="Glutea">
+<meta property="og:image" content="https://glutea.app/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Glutea: strength that fits your cycle. Glute workouts for women on iPhone.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Glutea · Strength that fits your cycle">
+<meta name="twitter:description" content="Glute workouts that fit your cycle. Coming soon to iPhone.">
+<meta name="twitter:image" content="https://glutea.app/assets/og-image.png">
 <style>
   :root { --bg: #FFF1F6; --bg2: #FFE3EE; --card: #FFFFFF; --ink: #3A2A33; --muted: #7A6670; --pink: #D94A82; --pink2: #F58DB1; --soft: #F8D3E2; --gold: #F2B84B; --frame: #2B1A24; }
   @media (prefers-color-scheme: dark) { :root { --bg: #1B1015; --bg2: #2A1620; --card: #26161D; --ink: #F7E8EF; --muted: #BFA3B0; --pink: #F58DB1; --pink2: #D94A82; --soft: #4A2837; --frame: #0E070A; } }
@@ -41,6 +51,25 @@
   .lead { color: var(--muted); font-size: 19px; max-width: 32em; margin: 0 auto 26px; }
   .soon { display: inline-block; background: linear-gradient(135deg, var(--pink2), var(--pink)); color: #fff; font-weight: 700; padding: 14px 28px; border-radius: 999px; box-shadow: 0 10px 28px rgba(217, 74, 130, .35); }
   .soon small { display: block; font-weight: 500; opacity: .9; font-size: 12px; }
+
+  /* launch switch: body[data-live="no"] shows "coming soon" + waitlist; "yes" shows the App Store badge */
+  [data-live="no"] .live-only, [data-live="yes"] .soon-only { display: none !important; }
+  .badge { display: inline-block; line-height: 0; }
+  .badge:hover { text-decoration: none; transform: translateY(-2px); }
+  .badge img { height: 54px; width: auto; display: block; }
+  .live-only .fine { margin-top: 12px; font-size: 13px; color: var(--muted); }
+
+  /* faq */
+  .faq { max-width: 720px; margin: 0 auto; display: grid; gap: 12px; }
+  .faq details { background: var(--card); border: 1px solid var(--soft); border-radius: 18px; padding: 0 20px; transition: box-shadow .25s ease; }
+  .faq details[open] { box-shadow: 0 10px 26px rgba(217, 74, 130, .12); }
+  .faq summary { cursor: pointer; list-style: none; font-weight: 700; padding: 16px 28px 16px 0; position: relative; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; position: absolute; right: 0; top: 50%; translate: 0 -50%; font-size: 24px; font-weight: 500; color: var(--pink); line-height: 1; }
+  .faq details[open] summary::after { content: "\2212"; }
+  .faq summary:focus-visible { outline: 2px solid var(--pink); outline-offset: 4px; border-radius: 8px; }
+  .faq .ans { margin: 0 0 16px; color: var(--muted); font-size: 15px; }
+  .faq .ans a { font-weight: 600; }
 
   /* phones */
   .phones { display: flex; justify-content: center; align-items: flex-end; gap: 0; margin: 48px auto 0; }
@@ -105,7 +134,7 @@
   @media (max-width: 560px) { .phone { width: 36vw; border-width: 5px; border-radius: 26px; } .phone.side { width: 28vw; } .phone.left { transform: translateX(14px) rotate(-5deg); } .phone.right { transform: translateX(-14px) rotate(5deg); } .lead { font-size: 17px; } }
 </style>
 </head>
-<body data-lang="en">
+<body data-lang="en" data-live="no">
 
 <div class="hero">
   <div class="hearts" aria-hidden="true"><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span></div>
@@ -114,8 +143,14 @@
     <img class="wordmark" src="/assets/wordmark.png" alt="Glutea">
     <h1><span data-en>Strength that fits <em>your cycle</em></span><span data-es>Fuerza que se adapta a <em>tu ciclo</em></span></h1>
     <p class="lead"><span data-en>Glute workouts for women, with simple cycle tracking and an assistant that answers your questions in plain words.</span><span data-es>Rutinas de glúteos para mujeres, con seguimiento sencillo del ciclo y un asistente que responde tus preguntas con palabras claras.</span></p>
-    <span class="soon"><span data-en>Coming soon to iPhone</span><span data-es>Muy pronto en iPhone</span></span>
-    <div class="wait">
+    <!-- AT LAUNCH: set data-live="yes" on <body> and put the real App Store link in the two "badge" hrefs below. -->
+    <div class="live-only">
+      <a class="badge" href="APP_STORE_URL_HERE" data-en><img src="/assets/badges/app-store-en.svg" alt="Download on the App Store" width="162" height="54"></a>
+      <a class="badge" href="APP_STORE_URL_HERE" data-es><img src="/assets/badges/app-store-es.svg" alt="Descárgala en el App Store" width="162" height="54"></a>
+      <p class="fine"><span data-en>Free to start. For iPhone.</span><span data-es>Gratis para empezar. Para iPhone.</span></p>
+    </div>
+    <span class="soon soon-only"><span data-en>Coming soon to iPhone</span><span data-es>Muy pronto en iPhone</span></span>
+    <div class="wait soon-only">
       <form id="wait" novalidate>
         <input type="email" id="wemail" name="email" required autocomplete="email" inputmode="email" maxlength="254" placeholder="you@email.com" aria-label="Email">
         <input class="hp" type="text" id="whp" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -156,6 +191,21 @@
       <div class="step reveal"><div><b><span data-en>Tell us about you</span><span data-es>Cuéntanos de ti</span></b><span><span data-en>Pick your level, where you train and which days you like.</span><span data-es>Elige tu nivel, dónde entrenas y qué días prefieres.</span></span></div></div>
       <div class="step reveal"><div><b><span data-en>Train and check in</span><span data-es>Entrena y revisa tu día</span></b><span><span data-en>Follow today's workout and log how you feel. It takes a few seconds.</span><span data-es>Sigue el entrenamiento de hoy y anota cómo te sientes. Toma unos segundos.</span></span></div></div>
       <div class="step reveal"><div><b><span data-en>Watch your patterns grow</span><span data-es>Mira crecer tus patrones</span></b><span><span data-en>The more you log, the more your insights show about you.</span><span data-es>Mientras más anotas, más te muestran tus resultados.</span></span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2 class="reveal"><span data-en>Questions, answered</span><span data-es>Preguntas frecuentes</span></h2>
+    <p class="sub reveal"><span data-en>The short answers, in plain words.</span><span data-es>Las respuestas cortas, con palabras claras.</span></p>
+    <div class="faq">
+      <details class="reveal"><summary><span data-en>Is Glutea free?</span><span data-es>¿Glutea es gratis?</span></summary><p class="ans"><span data-en>You can start for free. The free version includes your first training day each week, workout and cycle logging, your progress and records, the muscle guide, a sample of the exercise library and 3 assistant questions a week. Membership unlocks every training day, the full library, ready-made home workouts, the plan builder, insights, health checks and more. It is $9.99 a month or $59.99 a year.</span><span data-es>Puedes empezar gratis. La versión gratis incluye tu primer día de entrenamiento de cada semana, el registro de entrenamientos y del ciclo, tu progreso y récords, la guía de músculos, una muestra de la biblioteca de ejercicios y 3 preguntas al asistente por semana. La membresía desbloquea todos los días de entrenamiento, la biblioteca completa, rutinas listas para la casa, el creador de planes, los análisis, las revisiones de salud y más. Cuesta $9.99 al mes o $59.99 al año.</span></p></details>
+      <details class="reveal"><summary><span data-en>Do I need an account?</span><span data-es>¿Necesito una cuenta?</span></summary><p class="ans"><span data-en>No. You can use Glutea without making an account. If you want, you can sign in to keep an optional private backup of your logs, and you can turn it off any time.</span><span data-es>No. Puedes usar Glutea sin crear una cuenta. Si quieres, puedes iniciar sesión para guardar un respaldo privado y opcional de tus registros, y puedes apagarlo cuando quieras.</span></p></details>
+      <details class="reveal"><summary><span data-en>Where does my data go?</span><span data-es>¿A dónde van mis datos?</span></summary><p class="ans"><span data-en>Your logs, check-ins, workouts and photos are stored on your phone. When you use the assistant or the body scan, your question or photo is processed for that one request and is not stored by us. You can back up, restore or delete everything in Settings. Read the full <a href="/privacy/">Privacy Policy</a>.</span><span data-es>Tus registros, revisiones diarias, entrenamientos y fotos se guardan en tu teléfono. Cuando usas el asistente o el escaneo corporal, tu pregunta o foto se procesa solo para esa solicitud y nosotros no la guardamos. Puedes respaldar, restaurar o borrar todo en Ajustes. Lee la <a href="/privacy/">Política de privacidad</a> completa.</span></p></details>
+      <details class="reveal"><summary><span data-en>Is this medical advice?</span><span data-es>¿Esto es consejo médico?</span></summary><p class="ans"><span data-en>No. Glutea is for general fitness and education. It does not diagnose or treat any condition, and the assistant is not a doctor. Please talk to your doctor about any health concern.</span><span data-es>No. Glutea es para ejercicio general y educación. No diagnostica ni trata ninguna condición, y el asistente no es un médico. Habla con tu médico sobre cualquier inquietud de salud.</span></p></details>
+      <details class="reveal"><summary><span data-en>Which languages and phones does it work on?</span><span data-es>¿En qué idiomas y teléfonos funciona?</span></summary><p class="ans"><span data-en>Glutea works in English and Spanish, and it is made for iPhone.</span><span data-es>Glutea funciona en inglés y en español, y está hecha para iPhone.</span></p></details>
+      <details class="reveal"><summary><span data-en>How do I cancel my membership?</span><span data-es>¿Cómo cancelo mi membresía?</span></summary><p class="ans"><span data-en>On your iPhone, open Settings, tap your name, then Subscriptions, and choose Glutea. You can also open it from Settings inside the app. Questions? Write to <a href="mailto:support@glutea.app">support@glutea.app</a>.</span><span data-es>En tu iPhone, abre Ajustes, toca tu nombre, luego Suscripciones y elige Glutea. También puedes abrirlo desde Ajustes dentro de la app. ¿Preguntas? Escribe a <a href="mailto:support@glutea.app">support@glutea.app</a>.</span></p></details>
     </div>
   </div>
 </section>
